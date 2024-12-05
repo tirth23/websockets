@@ -4,6 +4,18 @@ const { Server } = require("socket.io");
 
 const app = express();
 app.use(express.static("public"));
+
+/* 
+The HTTP module's createServer method here creates an HTTP server instance. This server listens for network
+requests and can serve both HTTP and WebSocket requests.
+
+Express App (app): Manages the application logic, routing,
+middleware, etc., specic to handling web requests.
+HTTP Server (server): Manages the lower-level HTTP
+communication between the client and server for
+bidirectional communication
+
+*/
 const server = http.createServer(app);
 
 const io = new Server(server);

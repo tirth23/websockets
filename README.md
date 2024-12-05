@@ -41,9 +41,47 @@ npm i express socket.io
 ## WebSockets
 
 ### There's a dedicated channel for communication between the server and each client.
+
 ### Persistent Connections: unlike HTTP, WebSocket creates a persistent connection between each client and the server. This means that once a client (C1, C2, C3) establishes a connection to the server, it remains open for two-way communication until explicitly closed by eithe client or a server.
+
 ### WebSocket connection as a "channel" or "pipeline" that directly links each client to the server. This channel is unique and private to the client-server pair.
+
 ### Full-Duplex Communication: Illustrate that these channels are full-duplex, meaning that both the server and the client can send messages to each other independently and simultaneously without waiting for a request-response sequence.
+
+### Real-time Interaction: Highlight that this setup allows for real-time interaction. As soon as the server has new data (like a message or update), it can immediately send it to the connected client(s), and vice versa.
+
+### WebSocket starts as an HTTP connection and then "upgrades" to a WebSocket connection through a handshake process. This upgrade is initiated with an HTTP request including a header (Upgrade: websocket) indicating the desire to establish a WebSocket connection.
+
+### Another advantage that comes out is the header data in WebSocket communication is minimal because, unlike HTTP, it does not require the continuous transmission of cookies, user credentials, or other client-specic headers with each message, resulting in smaller packet sizes."
+
+## Demo websockets
+
+1. Search for a live crypto market and go to https://www.livecoinwatch.com/
+2. Go to network tab and select ws ( websockets ) and reload
+3. When you select the 'WS' (WebSocket) filter in the Network tab of your browser's developer tools and see a request with a status code of 101, you're looking at the WebSocket handshake.
+4. Status Code 101: This indicates 'Switching Protocols'. When you see this, it means the server understood the client's request to open a WebSocket connection and is agreeing to switch protocols from HTTP to WebSocket.
+5. Request URL: The URL starting with wss:// shows that the WebSocket connection is secure (similar to https:// for secure HTTP connections). The wss protocol indicates that data sent over the WebSocket connection is encrypted, providing the same level of security as HTTPS.
+6. Response Headers: headers like Upgrade: websocket and Connection: Upgrade,
+7. Messages Tab: After the handshake, you can switch to the 'Messages' tab within the WebSocket connection in the developer tools. This tab will show you the actual data frames being sent and received through the WebSocket. This is where you can see the real-time communication aspect of WebSockets. Go to the timestamp column to see the real time updates.
+
+## Cons of WebSockets
+
+- Resource Utilization for Idle Connections: WebSocket connections, even when idle, continue to consume resources on the server, which can be inecient compared to stateless HTTP connections that are closed after a transaction.
+- WebSocket does not have a built-in mechanism for back-pressure, which is the ability to handle situations where the server is sending data faster than the client can process it.
+- Each open WebSocket connection consumes resources on the client side, including memory and network ports. The client device's capabilities (such as CPU, RAM, and network bandwidth) can thus limit the number of connections that can be practically managed.
+- The persistent nature of the connection can pose additional security challenges, potential for the server to be exposed to Denial of Service (DoS) attacks.
+- Smaller packet size can lead to fragmentation of large messages
+
+## [WebSockets API](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
+
+### The WebSocket API is an advanced technology that makes it possible to open a two-way interactive communication session between the user's browser and a server. With this API, you can send messages to a server and receive event-driven responses without having to poll the server for a reply.
+
+### Socket.IO is a JavaScript library that enables real-time, bidirectional, and event-based communication between web clients (like browsers) and servers.
+
+### It's commonly used to build interactive and real-time applications, such as chat applications, live news feeds, and collaborative editing tools.
+
+
+
 
 client server
 emit("myeventName", args) -> socketObj.on("myeventName", () => {})
