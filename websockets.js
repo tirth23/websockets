@@ -22,6 +22,7 @@ const io = new Server(server);
 let room;
 
 io.on("connection", (socket) => {
+	// Open multiple tabs and all will have different socket ids
 	console.log("A user connected", socket.id);
 	//send message to client every 2s
 	// setInterval(() => {
@@ -29,6 +30,7 @@ io.on("connection", (socket) => {
 	// }, 2000);
 	// socket.emit("message", "message from the server");
 
+	// Broadcasts the received message to all other connected clients except the sender.
 	socket.on("message", (data) => {
 		socket.broadcast.emit("broadcast", data);
 	});
@@ -54,7 +56,7 @@ io.on("connection", (socket) => {
 		socket.leave(room);
 	});
 
-	//if tab is closed
+	//if tab is closed ore refresh, disconnect event is fired when a user disconnects from the server
 	socket.on("disconnect", () => {
 		console.log("User disconnected", socket.id);
 	});

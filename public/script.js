@@ -39,6 +39,7 @@ socket.on("broadcast", (data) => {
 	ul.appendChild(div);
 });
 
+// add an event listener to initiate room creation
 grpBtn.addEventListener("click", () => {
 	console.log("group created req");
 	socket.emit("create_grp", Math.random(0, 1) * 1000);

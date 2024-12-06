@@ -80,11 +80,18 @@ npm i express socket.io
 
 ### It's commonly used to build interactive and real-time applications, such as chat applications, live news feeds, and collaborative editing tools.
 
+## Rooms in Socket
 
+### Socket.IO provides a powerful feature called "rooms" that allows you to organize sockets into different groups. Rooms are a way to segregate clients based on certain criteria, such as users in a specic chat room or participants in a particular game. This makes it easy to broadcast messages to a subset of clients, rather than to every connected client.
 
+### Grouping Sockets: Rooms allow you to group sockets into different namespaces. Each socket can join multiple rooms.
 
-client server
+### Once sockets are grouped into rooms, you can emit events to all sockets in a room, which is useful for sending messages or updates to a specic group of users.
+
+### Sockets in one room are isolated from sockets in other rooms, which means broadcasting to one room does not affect sockets in other rooms.
+
+client -> server
 emit("myeventName", args) -> socketObj.on("myeventName", () => {})
 
-server client
+server -> client
 emit("myeventName", args) -> socketObj.on("myeventName", () => {})
